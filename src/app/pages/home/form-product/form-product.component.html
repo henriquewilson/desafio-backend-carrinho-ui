@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title">Adicionar Produto</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss(false)"></button>
+</div>
+<div class="modal-body">
+  <form [formGroup]="form">
+    <div class="form-group">
+      <div class="form-row">
+        <div class="col">
+          <label class="form-label">Nome do produto</label>
+          <input type="text" class="form-control" [formControlName]="'name'"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <label class="form-label">Descrição do produto</label>
+          <input type="text" class="form-control" [formControlName]="'description'"/>
+        </div>
+      </div>
+    </div>
+  </form>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary" (click)="save()">Adicionar</button>
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss(false)">Fechar</button>
+</div>
