@@ -13,13 +13,23 @@ import { FormProductComponent } from './pages/home/form-product/form-product.com
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import { FormAddItemComponent } from './pages/home/form-add-item/form-add-item.component';
+import { FormCreateCartComponent } from './pages/home/form-create-cart/form-create-cart.component';
+import {CartService} from "./services/leads/cart.service";
+import {ItemService} from "./services/leads/item.service";
+import { TheCartComponent } from './pages/home/the-cart/the-cart.component';
+import {DrawerService} from "./core/share-data/drawer.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LeftPadFilter,
-    FormProductComponent
+    FormProductComponent,
+    FormAddItemComponent,
+    FormCreateCartComponent,
+    TheCartComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +40,13 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     RouterModule.forRoot(rootRouterConfig, {useHash: false}),
     ToastrModule.forRoot(),
     ReactiveFormsModule,
+    MatSidenavModule,
   ],
   providers: [
     ProductService,
+    CartService,
+    ItemService,
+    DrawerService
   ],
   bootstrap: [AppComponent]
 })

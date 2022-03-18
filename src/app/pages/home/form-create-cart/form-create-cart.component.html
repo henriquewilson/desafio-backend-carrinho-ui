@@ -1,14 +1,20 @@
 <div class="modal-header">
-  <h4 class="modal-title">Adicionar Produto</h4>
+  <h4 class="modal-title">Abrir carrinho</h4>
   <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss(false)"></button>
 </div>
 <div class="modal-body">
+  <div class="row">
+    <div class="col">
+      <p>Um carrinho é vinculado a um endereço de e-mail. Insira um e-mail para criar um novo ou acessar um carrinho já
+        existentes</p>
+    </div>
+  </div>
   <form [formGroup]="form">
     <div class="form-group">
       <div class="form-row">
         <div class="col">
-          <label class="form-label">Descrição do produto</label>
-          <input type="text" class="form-control" [formControlName]="'description'"/>
+          <label class="form-label">E-mail</label>
+          <input type="email" class="form-control" [formControlName]="'email'"/>
         </div>
       </div>
     </div>
@@ -16,6 +22,6 @@
 
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-primary" (click)="save()">Adicionar</button>
+  <button type="button" class="btn btn-primary" (click)="save()">Abrir</button>
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.dismiss(false)">Fechar</button>
 </div>

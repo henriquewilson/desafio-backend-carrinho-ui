@@ -1,21 +1,19 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
-  selector: 'app-form-product',
-  templateUrl: './form-product.component.html'
+  selector: 'app-form-create-cart',
+  templateUrl: './form-create-cart.component.html'
 })
-export class FormProductComponent implements OnInit {
-
-  @Input() name: string | undefined;
+export class FormCreateCartComponent implements OnInit {
 
   form: FormGroup;
 
   constructor(public activeModal: NgbActiveModal, private formBuilder: FormBuilder, private toastr: ToastrService) {
     this.form = this.formBuilder.group({
-      description: [, Validators.required]
+      email: [, Validators.required],
     });
   }
 
@@ -25,7 +23,7 @@ export class FormProductComponent implements OnInit {
 
   save(): void {
     if (this.form.valid) {
-      this.activeModal.close(this.form.value);
+      this.activeModal.close(this.form.get('email')?.value);
     } else {
       this.toastr.warning('Preencha o campos corretamente', 'Incompleto!');
     }

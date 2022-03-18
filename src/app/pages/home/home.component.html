@@ -1,38 +1,44 @@
-<div class="container px-4 py-5" id="custom-cards">
-  <div class="row pb-2 border-bottom">
-    <div class="col">
-      <h2 class="">Todos produtos</h2>
-    </div>
-    <div class="col-auto">
-      <button (click)="open()" class="btn btn-outline-primary">Adicionar Produto</button>
-    </div>
-  </div>
+<mat-drawer-container class="example-container"  [hasBackdrop]="true" autosize>
+<!--  -->
+  <mat-drawer #drawer  (openedStart)="startedToOpen($event)" class="example-sidenav" mode="over" [position]="'end'">
+    <app-the-cart [cart]="cart" ></app-the-cart>
 
-  <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
-    <div class="col" *ngFor="let product of products | async">
-      <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg">
-        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-          <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{product.description}}</h2>
-          <ul class="d-flex list-unstyled mt-auto">
-            <li class="me-auto">
-              <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
-                   class="rounded-circle border border-white">
-            </li>
-            <li class="d-flex align-items-center me-3">
-              <svg class="bi me-2" width="1em" height="1em">
-                <use xlink:href="#geo-fill"></use>
-              </svg>
-              <small>Earth</small>
-            </li>
-            <li class="d-flex align-items-center">
-              <svg class="bi me-2" width="1em" height="1em">
-                <use xlink:href="#calendar3"></use>
-              </svg>
-              <small>{{product.code | leftPadFilter}}</small>
-            </li>
-          </ul>
+  </mat-drawer>
+  <div class="container px-4 py-5" id="custom-cards">
+    <div class="row pb-2 border-bottom">
+      <div class="col">
+        <h2 class="">Todos produtos</h2>
+      </div>
+      <div class="col-auto">
+        <button (click)="openFormProduct()" class="btn btn-outline-primary">Adicionar Produto</button>
+      </div>
+      <div class="col-auto">
+        <button (click)="showCart()" class="btn btn-outline-success">Ver Carrinho</button>
+      </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+      <div class="col" *ngFor="let product of products | async">
+        <div class="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg">
+          <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+            <h2 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">{{product.description}}</h2>
+            <ul class="d-flex list-unstyled mt-auto">
+              <li class="d-flex align-items-center me-3">
+                <button type="button" class="btn btn-light" (click)="openFormItem(product)">Adicionar ao carrinho</button>
+              </li>
+              <li class="d-flex align-items-center">
+                <svg class="bi me-2" width="1em" height="1em">
+                  <use xlink:href="#calendar3"></use>
+                </svg>
+                <small>{{product.code | leftPadFilter}}</small>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
+</mat-drawer-container>
+
+

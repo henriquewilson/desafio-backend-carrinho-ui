@@ -1,5 +1,5 @@
 <div class="modal-header">
-  <h4 class="modal-title">Adicionar Produto</h4>
+  <h4 class="modal-title">Adicionar {{product?.description}} ao carrinho</h4>
   <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss(false)"></button>
 </div>
 <div class="modal-body">
@@ -7,8 +7,14 @@
     <div class="form-group">
       <div class="form-row">
         <div class="col">
-          <label class="form-label">Descrição do produto</label>
-          <input type="text" class="form-control" [formControlName]="'description'"/>
+          <label class="form-label">Preço unitário</label>
+          <input type="number" class="form-control" [formControlName]="'unitPrice'"/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <label class="form-label">Quantidade</label>
+          <input type="number" class="form-control" [formControlName]="'quantity'"/>
         </div>
       </div>
     </div>
