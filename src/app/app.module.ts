@@ -17,9 +17,9 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import { FormAddItemComponent } from './pages/home/form-add-item/form-add-item.component';
 import { FormCreateCartComponent } from './pages/home/form-create-cart/form-create-cart.component';
 import {CartService} from "./services/leads/cart.service";
-import {ItemService} from "./services/leads/item.service";
 import { TheCartComponent } from './pages/home/the-cart/the-cart.component';
 import {DrawerService} from "./core/share-data/drawer.service";
+import {HasCartService} from "./core/share-data/has-cart.service";
 
 @NgModule({
   declarations: [
@@ -45,8 +45,8 @@ import {DrawerService} from "./core/share-data/drawer.service";
   providers: [
     ProductService,
     CartService,
-    ItemService,
-    DrawerService
+    DrawerService,
+    HasCartService
   ],
   bootstrap: [AppComponent]
 })

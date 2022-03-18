@@ -12,6 +12,7 @@ import {Item} from "../../../core/model/item";
 export class FormAddItemComponent implements OnInit {
 
   @Input() product: Product | undefined;
+  @Input() item: Item | undefined;
 
   form: FormGroup;
 
@@ -23,12 +24,20 @@ export class FormAddItemComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.item) {
+      this.form.get('unitPrice')?.setValue(this.item.unitPrice);
+      this.form.get('quantity')?.setValue(this.item.quantity);
+    }
   }
 
 
   save(): void {
     if (this.form.valid) {
-      this.activeModal.close({product: this.product, quantity: this.form.get('quantity')?.value, unitPrice: this.form.get('unitPrice')?.value} as Item);
+      this.activeModal.close({
+        product: this.product,
+        quantity: this.form.get('quantity')?.value,
+        unitPrice: this.form.get('unitPrice')?.value
+      } as Item);
     } else {
       this.toastr.warning('Preencha o campos corretamente', 'Incompleto!');
     }

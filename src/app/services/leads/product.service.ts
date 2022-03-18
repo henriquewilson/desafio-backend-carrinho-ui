@@ -12,21 +12,15 @@ export class ProductService {
   }
 
 
-  anyToForm(form: any): FormData {
-    const formData = new FormData();
-    Object.entries(form).forEach(([key, value]) => formData.append(key, value as any));
-    return formData;
-  }
-
   allProducts(): Observable<Product> {
     return this.http
-      .get<any>(`${environment.apiUrl}/all-products`);
+      .get<any>(`${environment.apiUrl}/product/all-products`);
   }
 
 
   addNewProduct(p: Product): Observable<any> {
     return this.http
-      .post<Product>(`${environment.apiUrl}/add-product`, p);
+      .post<Product>(`${environment.apiUrl}/product/add-product`, p);
   }
 
 

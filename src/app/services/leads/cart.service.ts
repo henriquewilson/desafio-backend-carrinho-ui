@@ -13,23 +13,29 @@ export class CartService {
   constructor(private http: HttpClient) {
   }
 
-
-
-  allShoppingCart(): Observable<ShoppingCart[]> {
-    return this.http
-      .get<any>(`${environment.apiUrl}/all-carts`);
-  }
-
-
   getShoppingCart(email: string): Observable<any> {
     return this.http
       .get<Product>(`${environment.apiUrl}/cart/${email}`);
   }
 
-  addNewItem(cart: ShoppingCart, i: Item): Observable<any> {
-    console.log(cart)
+  addNewItem(cart: ShoppingCart, i: Item): Observable<ShoppingCart> {
     return this.http
-      .post<Product>(`${environment.apiUrl}/cart/${cart.clientId}/add-item`, i);
+      .post<ShoppingCart>(`${environment.apiUrl}/cart/${cart.clientId}/add-item`, i);
+  }
+
+  removeItem(cart: ShoppingCart, i: Item): Observable<ShoppingCart> {
+    return this.http
+      .post<ShoppingCart>(`${environment.apiUrl}/cart/${cart.clientId}/remove-item`, i);
+  }
+
+  allItemsByCart(cart: ShoppingCart): Observable<Item[]> {
+    return this.http
+      .get<any>(`${environment.apiUrl}/cart/${cart.clientId}/items`);
+  }
+
+  logout(cart: ShoppingCart): Observable<any> {
+    return this.http
+      .get<Product>(`${environment.apiUrl}/cart/${cart.clientId}/logout`);
   }
 
 

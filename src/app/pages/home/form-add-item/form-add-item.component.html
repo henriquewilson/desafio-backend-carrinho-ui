@@ -14,7 +14,7 @@
       <div class="form-row">
         <div class="col">
           <label class="form-label">Quantidade</label>
-          <input type="number" class="form-control" [formControlName]="'quantity'"/>
+          <input type="number" class="form-control" [formControlName]="'quantity'" [readonly]="item !== undefined && item.quantity > 0"/>
         </div>
       </div>
     </div>

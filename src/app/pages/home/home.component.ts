@@ -9,9 +9,9 @@ import {FormAddItemComponent} from "./form-add-item/form-add-item.component";
 import {ShoppingCart} from "../../core/model/shopping-cart";
 import {FormCreateCartComponent} from "./form-create-cart/form-create-cart.component";
 import {CartService} from "../../services/leads/cart.service";
-import {ItemService} from "../../services/leads/item.service";
 import {Item} from "../../core/model/item";
 import {DrawerService} from "../../core/share-data/drawer.service";
+import {HasCartService} from "../../core/share-data/has-cart.service";
 
 
 @Component({
@@ -27,12 +27,25 @@ export class HomeComponent implements OnInit {
 
   @ViewChild('drawer') drawer: MatDrawer | undefined;
 
-  constructor(private cartService: CartService, private productService: ProductService, private itemService: ItemService,
-              private modalService: NgbModal, private drawerService: DrawerService) {
+  constructor(private cartService: CartService, private productService: ProductService, private modalService: NgbModal,
+              private drawerService: DrawerService, private hasCartService: HasCartService) {
   }
 
   ngOnInit(): void {
     this.products = this.productService.allProducts();
+
+    this.hasCartService.deleteCartObservable.subscribe(value => {
+      if (value) {
+        this.cartService.logout(this.cart!).subscribe(value => {
+          if (value) {
+            this.cart = undefined;
+          } else {
+
+          }
+        })
+
+      }
+    });
   }
 
   startedToOpen(e: any) {
@@ -49,6 +62,7 @@ export class HomeComponent implements OnInit {
       this.setupCart().subscribe(value => {
         if (value) {
           this.cart = value;
+          this.hasCartService.hasCartChange(true);
           this.drawer?.open();
         }
       });
@@ -72,12 +86,14 @@ export class HomeComponent implements OnInit {
     this.setupCart().subscribe(cart => {
       if (cart) {
         this.cart = cart;
+        this.hasCartService.hasCartChange(true);
         const modalRef = this.modalService.open(FormAddItemComponent);
         modalRef.componentInstance.product = product;
         modalRef.result.then(value => {
           console.log(value);
           this.cartService.addNewItem(this.cart!, value as Item).subscribe(value1 => {
             console.log(value1);
+            this.cart = value1;
             this.products = this.productService.allProducts();
           });
         }).catch(reason => {
