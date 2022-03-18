@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
         this.cartService.logout(this.cart!).subscribe(value => {
           if (value) {
             this.cart = undefined;
+            this.drawer?.close();
           } else {
 
           }

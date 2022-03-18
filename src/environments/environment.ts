@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:8080/api'
+  // apiUrl: 'http://localhost:8080/api'
+  apiUrl: 'http://teste-env.eba-km5zabdy.us-west-2.elasticbeanstalk.com/api'
 };
 
 /*

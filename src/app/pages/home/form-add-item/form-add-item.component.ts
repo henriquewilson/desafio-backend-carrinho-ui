@@ -36,7 +36,7 @@ export class FormAddItemComponent implements OnInit {
       this.activeModal.close({
         product: this.product,
         quantity: this.form.get('quantity')?.value,
-        unitPrice: this.form.get('unitPrice')?.value
+        unitPrice: (this.item !== undefined && this.item.quantity > 0) ? 0 : this.form.get('unitPrice')?.value
       } as Item);
     } else {
       this.toastr.warning('Preencha o campos corretamente', 'Incompleto!');
