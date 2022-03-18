@@ -1,27 +1,40 @@
-<table class="table table-striped">
-  <thead>
-  <tr>
-    <th scope="col">#</th>
-    <th scope="col">Produto</th>
-    <th scope="col">Preço Unitário</th>
-    <th scope="col">Quantidade</th>
-    <th scope="col">Subtotal</th>
-    <th scope="col">Acões</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let item of cart?.items">
-    <th scope="row">{{item?.product?.code | leftPadFilter}}</th>
-    <td>{{item?.product?.description}}</td>
-    <td>{{item?.unitPrice | currency}}</td>
-    <td>{{item?.quantity}}</td>
-    <td *ngIf="item?.unitPrice && item?.quantity">{{(item.unitPrice * item.quantity) | currency}}</td>
-    <td>
-      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-        <button type="button" class="btn btn-danger" (click)="removeItem(item)">Remove</button>
-        <button type="button" class="btn btn-outline-warning" (click)="openFormItem(item)">Editar</button>
-      </div>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div class="table-content">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Produto</th>
+      <th scope="col">Preço Unitário</th>
+      <th scope="col">Quantidade</th>
+      <th scope="col">Subtotal</th>
+      <th scope="col">Acões</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of cart?.items">
+      <th scope="row">{{item?.product?.code | leftPadFilter}}</th>
+      <td>{{item?.product?.description}}</td>
+      <td>{{item?.unitPrice | currency}}</td>
+      <td>{{item?.quantity}}</td>
+      <td *ngIf="item?.unitPrice && item?.quantity">{{(item.unitPrice * item.quantity) | currency}}</td>
+      <td>
+        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+          <button type="button" class="btn btn-danger" (click)="removeItem(item)">Remove</button>
+          <button type="button" class="btn btn-outline-warning" (click)="openFormItem(item)">Editar</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="row g-0">
+  <div class="row justify-content-between">
+    <div class="col-auto">
+      <h4>Total: <b>{{total | currency}}</b></h4>
+    </div>
+    <div class="col-auto">
+      <h4>Média geral: <b>{{average | currency}}</b></h4>
+    </div>
+
+  </div>
+</div>

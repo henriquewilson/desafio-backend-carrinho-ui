@@ -33,9 +33,19 @@ export class CartService {
       .get<any>(`${environment.apiUrl}/cart/${cart.clientId}/items`);
   }
 
-  logout(cart: ShoppingCart): Observable<any> {
+  totalByCart(cart: ShoppingCart): Observable<number> {
     return this.http
-      .get<Product>(`${environment.apiUrl}/cart/${cart.clientId}/logout`);
+      .get<number>(`${environment.apiUrl}/cart/${cart.clientId}/total`);
+  }
+
+  allCartsAverage(): Observable<number> {
+    return this.http
+      .get<number>(`${environment.apiUrl}/cart/average`);
+  }
+
+  logout(cart: ShoppingCart): Observable<boolean> {
+    return this.http
+      .get<boolean>(`${environment.apiUrl}/cart/${cart.clientId}/logout`);
   }
 
 
