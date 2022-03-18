@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.hasCartService.hasCartObservable.subscribe(value => {
-      console.log(value);
       this.hasCart = value;
     });
   }

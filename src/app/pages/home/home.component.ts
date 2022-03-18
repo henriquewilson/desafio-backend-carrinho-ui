@@ -49,8 +49,6 @@ export class HomeComponent implements OnInit {
   }
 
   startedToOpen(e: any) {
-    console.log('startedToOpen');
-    console.log(e);
     this.drawerService.startedToOpen(true);
   }
 
@@ -72,13 +70,10 @@ export class HomeComponent implements OnInit {
   openFormProduct() {
     const modalRef = this.modalService.open(FormProductComponent);
     modalRef.result.then(value => {
-      console.log(value);
       this.productService.addNewProduct(value as Product).subscribe(value1 => {
-        console.log(value1);
         this.products = this.productService.allProducts();
       });
     }).catch(reason => {
-      console.log(reason);
     });
   }
 
@@ -90,14 +85,12 @@ export class HomeComponent implements OnInit {
         const modalRef = this.modalService.open(FormAddItemComponent);
         modalRef.componentInstance.product = product;
         modalRef.result.then(value => {
-          console.log(value);
           this.cartService.addNewItem(this.cart!, value as Item).subscribe(value1 => {
-            console.log(value1);
+
             this.cart = value1;
             this.products = this.productService.allProducts();
           });
         }).catch(reason => {
-          console.log(reason);
         });
       }
     });
@@ -112,13 +105,11 @@ export class HomeComponent implements OnInit {
       }
       const modalRef = this.modalService.open(FormCreateCartComponent);
       modalRef.result.then(value => {
-        console.log(value);
         this.cartService.getShoppingCart(value).subscribe(value1 => {
           subscriber.next(value1);
         });
       }).catch(reason => {
         subscriber.next();
-        console.log(reason);
       });
     });
 

@@ -25,7 +25,6 @@ export class TheCartComponent implements OnInit {
   ngOnInit(): void {
 
     this.drawerService.startedOpenObservable.subscribe(open => {
-      console.log(open)
       if (open) {
         this.loadCartItems();
       }
@@ -34,7 +33,6 @@ export class TheCartComponent implements OnInit {
 
   removeItem(item: Item) {
     this.cartService.removeItem(this.cart!, item).subscribe(value => {
-      console.log(value);
       this.cart = value;
       this.loadTotal();
     });
@@ -45,14 +43,11 @@ export class TheCartComponent implements OnInit {
     modalRef.componentInstance.item = item;
     modalRef.componentInstance.product = item?.product;
     modalRef.result.then(value => {
-      console.log(value);
       this.cartService.addNewItem(this.cart!, value as Item).subscribe(value1 => {
-        console.log(value1);
         this.cart = value1;
         this.loadTotal();
       });
     }).catch(reason => {
-      console.log(reason);
     });
 
   }
@@ -60,7 +55,6 @@ export class TheCartComponent implements OnInit {
   private loadCartItems() {
     if (this.cart?.clientId) {
       this.cartService.allItemsByCart(this.cart).subscribe(value => {
-        console.log(value);
         this.cart!.items = value;
         this.loadTotal();
       });
@@ -70,12 +64,10 @@ export class TheCartComponent implements OnInit {
   private loadTotal() {
     if (this.cart?.clientId) {
       this.cartService.totalByCart(this.cart).subscribe(value => {
-        console.log(value);
         this.total = value;
       });
 
       this.cartService.allCartsAverage().subscribe(value => {
-        console.log(value);
         this.average = value;
       });
     }
